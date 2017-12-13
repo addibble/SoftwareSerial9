@@ -161,8 +161,11 @@ void SoftwareSerial9::recv()
       d >>= 1;
       DebugPulse(_DEBUG_PIN2, 1);
       if (rx_pin_read())
-        d |= 0x100;
+        d |= 0x8000;
     }
+	
+	// Shift in the remaining 7 bits to make up 16
+	d >>= 7;
 
     if (_inverse_logic)
       d = ~d;
