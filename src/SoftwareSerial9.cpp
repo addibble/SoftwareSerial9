@@ -165,7 +165,7 @@ void SoftwareSerial9::recv()
     }
 
     if (_inverse_logic)
-      d = ~d;
+      d ^= 511;	// toggle using binary mask 111111111
 
     // if buffer full, set the overflow flag and return
     uint8_t next = (_receive_buffer_tail + 1) % _SS_MAX_RX_BUFF;
